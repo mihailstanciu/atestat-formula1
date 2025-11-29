@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🏎️ Formula 1 | Atestat Mate-Info</title>
+    
+    <style>
+        /* Reset de bază */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        /* 1. STILURI PENTRU FUNDALUL VIDEO/IMAGINE (HERO SECTION) */
+        .hero-section {
+            height: 100vh; /* Ocupă toată înălțimea ecranului */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden; /* Ascunde ce depășește (video/imagine) */
+            color: white; /* Textul va fi alb pe fundal întunecat */
+            text-align: center;
+        }
+
+        .hero-video-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2; /* Pune video-ul sub conținut */
+        }
+
+        #background-video, #background-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Asigură că video/imaginea acoperă tot containerul */
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6); /* Strat întunecat pentru vizibilitatea textului */
+            z-index: -1;
+        }
+
+        .hero-content {
+            z-index: 1; /* Aduce conținutul (Logo, Titlu) deasupra overlay-ului */
+        }
+        
+        /* Stil pentru LOGO-ul central și Titlu */
+        .main-logo {
+            width: 300px; /* Mărimea logo-ului central */
+            height: auto;
+            margin-bottom: 20px;
+        }
+        
+        .hero-content h1 {
+            font-size: 4em;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            text-shadow: 2px 2px 8px #000;
+            border-bottom: 3px solid #E10600; /* Linia roșie specifică F1 */
+            padding-bottom: 10px;
+        }
+
+        /* 2. STILURI PENTRU BARA DE NAVIGAȚIE (Header) */
+        .main-header {
+            position: fixed; /* Bara de navigație rămâne fixă sus */
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(29, 29, 27, 0.95); /* Gri închis semi-transparent */
+            padding: 10px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 10; /* Asigură că este mereu deasupra celorlalte elemente */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .header-logo {
+            height: 40px; /* Logo-ul mic din colțul stânga */
+        }
+
+        .main-nav a {
+            color: white;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-weight: bold;
+            padding: 10px 15px;
+            margin-left: 5px;
+            transition: color 0.3s, background-color 0.3s;
+        }
+
+        .main-nav a:hover {
+            color: #E10600; /* Roșu F1 la hover */
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        /* 3. STILURI PENTRU SECȚIUNILE DE CONȚINUT (Piloți, Circuite, etc.) */
+        .section {
+            padding: 60px 40px;
+            min-height: 50vh;
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 2.5em;
+            color: #E10600; 
+            margin-bottom: 40px;
+            border-bottom: 2px solid #333;
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+        
+        /* Stiluri pentru Piloți (Carduri) */
+        .card-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .driver-card {
+            width: 300px;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-top: 5px solid #E10600; /* Linia roșie de accent */
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        
+        .driver-card:hover {
+            transform: translateY(-5px); /* Efect de ridicare la hover */
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .driver-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .driver-info {
+            padding: 20px;
+            text-align: left;
+        }
+
+        .driver-info h3 {
+            color: #1D1D1B;
+            margin-bottom: 5px;
+        }
+
+        .driver-info p {
+            font-size: 0.9em;
+            color: #555;
+        }
+
+        /* Stiluri pentru Footer */
+        footer {
+            background-color: #1D1D1B;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-size: 0.8em;
+        }
+
+    </style>
+    
+</head>
+<body>
+
+    <header class="main-header">
+        <img src="logoformula1.png" alt="Logo F1" class="header-logo">
+        
+        <nav class="main-nav">
+            <a href="#acasa">Acasă</a>
+            <a href="#piloti">Piloți</a>
+            <a href="#circuite">Circuite</a>
+            <a href="#echipe">Echipe</a>
+                  </nav>
+    </header>
+
+    <section class="hero-section" id="acasa">
+        
+        <div class="hero-video-container">
+    
+    <video autoplay muted loop id="background-video">
+        <source src="video.mp4" type="video/mp4"> 
+        Browserul tău nu suportă video.
+    </video>
+    
+    </div>        
+        <div class="overlay"></div> <div class="hero-content">
+            <img src="logoformula1.png" alt="Logo Formula 1" class="main-logo">
+            <h1>MAREA VITEZĂ</h1>
+            <p style="margin-top: 15px; font-size: 1.2em; text-shadow: 1px 1px 3px #000;">
+                Prezentarea completă a celor mai rapide mașini și a eroilor din Formula 1
+            </p>
+        </div>
+    </section>
+<section class="section" id="piloti" style="background-color: #1D1D1B; color: white;">
+    <h2 class="section-title">PILOTI DE CURSĂ</h2>
+    <p>Eroii vitezei: o scurtă prezentare a celor mai talentați piloți din competiția Formula 1.</p>
+    
+            <div class="card-container" style="margin-top: 30px;">
+            
+            <div class="driver-card">
+                <img src="hamilton1.jpg" alt="Lewis Hamilton">
+                <div class="driver-info">
+                    <h3>Lewis Hamilton</h3>
+                    <p>Echipa: Mercedes-AMG PETRONAS</p>
+                    <p>Numărul de cursă: 44</p>
+                    <p>Descriere: 7 titluri mondiale. Unul dintre cei mai decorați piloți din istorie, cunoscut pentru viteza sa pe ploaie.</p>
+                </div>
+            </div>
+
+            <div class="driver-card">
+                <img src="verstapen.jpg" alt="Max Verstappen">
+                <div class="driver-info">
+                    <h3>Max Verstappen</h3>
+                    <p>Echipa: Oracle Red Bull Racing</p>
+                    <p>Numărul de cursă: 1</p>
+                    <p>Descriere: Campion mondial multiplu. Stil de pilotaj agresiv și o adaptabilitate remarcabilă.</p>
+                </div>
+            </div>
+
+            <div class="driver-card" style="border-top-color: #E10600;">
+                <img src="leclerc1.jpg" alt="Charles Leclerc">
+                <div class="driver-info">
+                    <h3>Charles Leclerc</h3>
+                    <p>Echipa: Scuderia Ferrari</p>
+                    <p>Numărul de cursă: 16</p>
+                    <p>Descriere: Talent precoce de la Ferrari, faimos pentru pole-position-urile și viteza sa brută.</p>
+                </div>
+            </div>
+            
+            <div class="driver-card" style="border-top-color: #0600EF;">
+                <img src="sergio1.jpg" alt="Sergio Pérez">
+                <div class="driver-info">
+                    <h3>Sergio Pérez</h3>
+                    <p>Echipa: Oracle Red Bull Racing</p>
+                    <p>Numărul de cursă: 11</p>
+                    <p>Descriere: Expert în gestionarea pneurilor și performanță excelentă pe circuitele urbane.</p>
+                </div>
+            </div>
+            
+            <div class="driver-card" style="border-top-color: #FF8700;">
+                <img src="norris1.jpg" alt="Lando Norris">
+                <div class="driver-info">
+                    <h3>Lando Norris</h3>
+                    <p>Echipa: McLaren Formula 1 Team</p>
+                    <p>Numărul de cursă: 4</p>
+                    <p>Descriere: Un pilot carismatic și rapid, considerat unul dintre viitorii campioni ai sportului.</p>
+                </div>
+            </div>
+            
+        </div>
+    </section>    
+  </section>
+
+        <section class="section" id="circuite" style="background-color: #f0f0f0;">
+        <h2 class="section-title">CIRCUITE LEGENDARE</h2>
+        <p>Descoperiți cele mai rapide, mai dificile și mai iubite circuite care găzduiesc Marele Premiu de Formula 1.</p>
+        
+        <div class="card-container" style="margin-top: 30px;">
+            
+            <div class="driver-card" style="border-top-color: #1D1D1B;">
+                <img src="monaco.jpg" alt="Circuitul Monaco">
+                <div class="driver-info">
+                    <h3>Monaco</h3>
+                    <p>Oraș: Monte Carlo, Monaco</p>
+                    <p>Tip: Circuit urban</p>
+                    <p>Detalii: Străzi înguste, viraje lente, precizie maximă. Cunoscut ca "bijuteria coroanei F1".</p>
+                </div>
+            </div>
+
+            <div class="driver-card" style="border-top-color: #1D1D1B;">
+                <img src="monza.jpeg" alt="Circuitul Monza">
+                <div class="driver-info">
+                    <h3>Monza</h3>
+                    <p>Oraș: Monza, Italia</p>
+                    <p>Tip: Circuit de viteză</p>
+                    <p>Detalii: Cunoscut ca "Templul Vitezei", având cele mai lungi linii drepte și viteze maxime din calendar.</p>
+                </div>
+            </div>
+            
+            <div class="driver-card" style="border-top-color: #1D1D1B;">
+                <img src="spa.jpeg" alt="Circuitul Spa-Francorchamps">
+                <div class="driver-info">
+                    <h3>Spa-Francorchamps</h3>
+                    <p>Oraș: Stavelot, Belgia</p>
+                    <p>Tip: Circuit clasic</p>
+                    <p>Detalii: Unul dintre cele mai dificile și mai lungi circuite, faimos pentru virajul său Eau Rouge-Raidillon.</p>
+                </div>
+            </div>
+
+            <div class="driver-card" style="border-top-color: #1D1D1B;">
+                <img src="silverstone.jpeg" alt="Circuitul Silverstone">
+                <div class="driver-info">
+                    <h3>Silverstone</h3>
+                    <p>Oraș: Silverstone, Marea Britanie</p>
+                    <p>Tip: Circuit de forță</p>
+                    <p>Detalii: Casa Marelui Premiu Britanic și a primului GP de F1. Reprezentativ pentru virajele sale rapide.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+    </section>
+    <section class="section" id="echipe">
+    <h2 class="section-title">ECHIPE ȘI MONOPOSTURI</h2>
+    <p>Prezentarea principalelor echipe din Formula 1, alături de specificațiile de bază ale monoposturilor lor.</p>
+    
+    <div class="card-container" style="margin-top: 30px;">
+        
+        <div class="driver-card team-card" style="border-top-color: #0600EF;"> 
+            <img src="monopostredbull.jpeg" alt="Monopost Red Bull Racing">
+            <div class="driver-info">
+                <h3>Oracle Red Bull Racing</h3>
+                <p>Țara de origine: Austria / Marea Britanie</p>
+                <p>Motor: Honda RBPT</p>
+                <p>Descriere: Cunoscută pentru aerodinamica agresivă și ritmul constant în cursă.</p>
+            </div>
+        </div>
+
+        <div class="driver-card team-card" style="border-top-color: #E10600;"> 
+            <img src="monopostferarri.jpeg" alt="Monopost Scuderia Ferrari">
+            <div class="driver-info">
+                <h3>Scuderia Ferrari</h3>
+                <p>Țara de origine: Italia</p>
+                <p>Motor: Ferrari</p>
+                <p>Descriere: Cea mai veche și faimoasă echipă din F1, cunoscută sub numele de 'Caii cabrați'.</p>
+            </div>
+        </div>
+        
+        <div class="driver-card team-card" style="border-top-color: #00A99D;"> 
+            <img src="monopostmercedes.jpeg" alt="Monopost Mercedes">
+            <div class="driver-info">
+                <h3>Mercedes-AMG PETRONAS</h3>
+                <p>Țara de origine: Germania</p>
+                <p>Motor: Mercedes</p>
+                <p>Descriere: Echipa dominantă a erei hibride. Cunoscută pentru fiabilitate și inovație.</p>
+            </div>
+        </div>
+        
+        <div class="driver-card team-card" style="border-top-color: #FF8700;"> 
+            <img src="monopostmclaren.jpeg" alt="Monopost McLaren">
+            <div class="driver-info">
+                <h3>McLaren Formula 1 Team</h3>
+                <p>Țara de origine: Marea Britanie</p>
+                <p>Motor: Mercedes</p>
+                <p>Descriere: Una dintre cele mai istorice echipe. Se remarcă prin designul Papaya Orange.</p>
+            </div>
+        </div>
+
+    </div>
+</section>
+    <footer id="contact">
+        <p>&copy; 2024 Formula 1 Atestat | Realizat de Elevul Stanciu Mihail | Mate-Info, Clasa a XII-a B</p>
+    </footer>
+
+</body>
+</html>
