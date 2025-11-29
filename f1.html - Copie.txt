@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formula 1</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #000;
+            color: #fff;
+        }
+        header {
+            background-color: #ff0000;
+            padding: 20px;
+            text-align: center;
+        }
+        section {
+            padding: 20px;
+        }
+        h2 {
+            color: #ff0000;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Formula 1</h1>
+    </header>
+
+    <section id="pilots">
+        <h2>Piloți</h2>
+        <p>Aici vor fi descrierile piloților de Formula 1.</p>
+    </section>
+
+    <section id="cars">
+        <h2>Mașini</h2>
+        <p>Aici vor fi descrierile mașinilor de Formula 1.</p>
+    </section>
+
+    <section id="circuits">
+        <h2>Circuite</h2>
+        <p>Aici vor fi descrierile circuitelor de Formula 1.</p>
+    </section>
+</body>
+</html>
